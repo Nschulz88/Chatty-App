@@ -52,7 +52,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar onSubmit={this.addMessage} currentUser={this.state.currentUser.name} />
+        <ChatBar onKeyUp={this.addMessage} currentUser={this.state.currentUser.name} />
       </div>
     );
   }
