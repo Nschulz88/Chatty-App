@@ -8,7 +8,7 @@ constructor() {
     super();
 }
   render() {
-    console.log("Rendering <MessageList/>");
+    console.log("Rendering <MessageList/>", this.props);
     const messageText = this.props.messages.map((message, i) => (
         <Message 
         key={i} 
