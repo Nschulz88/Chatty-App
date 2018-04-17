@@ -37,7 +37,7 @@ class App extends Component {
   addMessage(newMessageDetails) {
     console.log('newMessageDetails', newMessageDetails);
     const oldMessageList = this.state.messages;
-    const newMessageList = [...oldMessageList, {username: newMessageDetails.username, content: newMessageDetails.content}];
+    const newMessageList = [...oldMessageList, {username: newMessageDetails.username || 'Anonymous', content: newMessageDetails.content}];
     console.log(newMessageList);
     this.setState({ 
       messages: newMessageList 
@@ -52,7 +52,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar onSubmit={this.addMessage} currentUser={this.state.currentUser} />
+        <ChatBar onSubmit={this.addMessage} currentUser={this.state.currentUser.name} />
       </div>
     );
   }

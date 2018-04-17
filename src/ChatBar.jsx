@@ -6,7 +6,7 @@ class ChatBar extends Component {
         console.log('this.props', this.props.currentUser);
 
         this.state = {
-            username: '',
+            username: this.props.currentUser,
             content: ''
         };
         this.handleChange = this.handleChange.bind(this);
@@ -20,22 +20,21 @@ class ChatBar extends Component {
     }
 
     handleSubmit(evt) {
-            evt.preventDefault();
-            console.log('is this even happening?');
-            console.log('evt.target.elements:', evt.target.elements);
-            this.props.onSubmit(this.state);
-            
+        if (evt.key === 'Enter') {
+            console.log('Enter key pressed');
+            console.log('state:', this.state);
+            const {username, content} = this.state;
+            this.props.onSubmit({username, content});
+        }   
     }
 
   render() {
     console.log('Rendering <ChatBar/>');
     return (
     <footer className="chatbar">
-        <form onSubmit={this.handleSubmit}>
-            <input className="chatbar-username" name="username" type="text" onChange={this.handleChange} value={this.state.username} placeholder={this.props.currentUser.name} />
-            <input className="chatbar-message" name="content" type="text" onChange={this.handleChange} value={this.state.content} placeholder="Type a message and hit ENTER" />
-            <input type="submit" value="Submit" />
-        </form>
+            <input className="chatbar-username" name="username" type="text" onChange={this.handleChange} value={this.state.username} placeholder="Anonymous"/>
+            <input className="chatbar-message" name="content" type="text" onKeyUp={this.handleSubmit} onChange={this.handleChange} value={this.state.content} placeholder="Type a message and hit ENTER" />
+
     </footer>
     );
   }
