@@ -9,10 +9,10 @@ constructor() {
 }
   render() {
     console.log("Rendering <MessageList/>", this.props);
-    const messageText = this.props.messages.map((message, i) => (
+    const messageText = this.props.messages.map((message) => (
         <Message 
-        key={i} 
-        type={message.type}
+        key={message.id} 
+        datatype={message.type}
         content={message.content}
         username={message.username}
         />

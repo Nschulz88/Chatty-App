@@ -11,47 +11,64 @@ class App extends Component {
     this.state = {
       currentUser: {name: 'Bob'}, // optional. if currentUser is not defined, it means the user is Anonymous
       messages: []};
-    this.addMessage = this.addMessage.bind(this);
+
+    // this.addMessage = this.addMessage.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
+    this.changeUsername = this.changeUsername.bind(this);
   }
 
-  // createSocketFunction(){
-  //   let socket = new WebSocket('ws://localhost:3001');
-  //   socket.onmessage=(event)=>{
-  //     console.log("hi");
-  //   };
-  //   return socket;
-  // }
   componentDidMount() {
     console.log('componentDidMount <App />');
-    let socket = new WebSocket('ws://localhost:3001');
-    this.socket = socket;
-    //this.socket = socket;
-    // console.log('connecting has begun!  inform the peasants!')
-    // this.socket.onopen = function (event) {
-    //   console.log('event', event);
-    //   console.log('console.logged Connected to server');
-    //   socket.send('sdfkjhsfkhsd;fjhs;r');
-    // };
-   
-    // socket.onmessage = function(str) {
-    //   console.log('Someone sent this: ', str);
-    //   //socket.send('Connected to server');
-    // };
-
-
-  }
-
-  addMessage(newMessageDetails) {
-    console.log('newMessageDetails', newMessageDetails);
-    const oldMessageList = this.state.messages;
-    const newMessageList = [...oldMessageList, {username: newMessageDetails.username || 'Anonymous', content: newMessageDetails.content}];
-    console.log(newMessageList);
-    this.setState({ 
-      messages: newMessageList 
+    this.socket = new WebSocket('ws://localhost:3001');
+    console.log('connecting has begun!  inform the peasants!')
+    this.socket.addEventListener('message', (event) => {
+      console.log('I am in my Client socket event listener, logging event', event);
+      const messageObject = JSON.parse(event.data);
+      switch(messageObject.type) {
+        case 'incomingMessage':
+          this.setState({
+            messages: this.state.messages.concat(messageObject),
+          });
+          break;
+        case 'incomingNotification':
+          this.setState({
+            messages: this.state.messages.concat(messageObject),
+          });
+          break;
+        default:
+          throw new Error('Unknown event type ' + messageObject.type);
+      }
     });
-  
-    this.socket.send(JSON.stringify(newMessageDetails));
+  } 
+
+  sendMessage(contentObject) {
+    console.log('LOGGING content fomr the sendMessage function: ', contentObject);
+    this.socket.send(JSON.stringify(contentObject));
   }
+
+  changeUsername(username) {
+    let content = this.state.currentUser.name + ' changed their name to ' + username + '.';
+
+    let messageObject = {
+      content: content,
+      type: 'postNotification'
+    };
+
+    this.socket.send(JSON.stringify(messageObject));
+
+    this.setState({ currentUser: { name: username }});
+  }
+   
+  // addMessage(newMessageDetails) {
+  //   console.log('newMessageDetails', newMessageDetails);
+  //   const oldMessageList = this.state.messages;
+  //   const newMessageList = [...oldMessageList, {username: newMessageDetails.username || 'Anonymous', content: newMessageDetails.content}];
+  //   console.log(newMessageList);
+  //   this.setState({ 
+  //     messages: newMessageList 
+  //   });
+  //   this.socket.send(JSON.stringify(newMessageDetails));
+  // }
 
   render() {
     console.log('Rendering <App/>');
@@ -61,7 +78,7 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
         </nav>
         <MessageList messages={this.state.messages}/>
-        <ChatBar onKeyUp={this.addMessage} currentUser={this.state.currentUser.name} />
+        <ChatBar onKeyUp={this.sendMessage} changeUsername={this.changeUsername} currentUser={this.state.currentUser.name} />
       </div>
     );
   }
