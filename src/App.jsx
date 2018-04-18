@@ -3,35 +3,42 @@ import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    // this.socket = this.createSocketFunction()
+  
 
     this.state = {
       currentUser: {name: 'Bob'}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: [
-        {
-          username: 'Bob',
-          content: 'Has anyone seen my marbles?',
-        },
-        {
-          username: 'Anonymous',
-          content: 'No, I think you lost them. You lost your marbles Bob. You lost them for good.'
-        }
-      ]};
-  this.addMessage = this.addMessage.bind(this);
+      messages: []};
+    this.addMessage = this.addMessage.bind(this);
   }
 
+  // createSocketFunction(){
+  //   let socket = new WebSocket('ws://localhost:3001');
+  //   socket.onmessage=(event)=>{
+  //     console.log("hi");
+  //   };
+  //   return socket;
+  // }
   componentDidMount() {
     console.log('componentDidMount <App />');
-    setTimeout(() => {
-      console.log('Simulating incoming message');
-      // Add a new message to the list of messages in the data store
-      const newMessage = {id: 3, username: 'Michelle', content: 'Hello there!'};
-      const messages = this.state.messages.concat(newMessage)
-      // Update the state of the app component.
-      // Calling setState will trigger a call to render() in App and all child components.
-      this.setState({messages: messages})
-    }, 3000);
+    let socket = new WebSocket('ws://localhost:3001');
+    this.socket = socket;
+    //this.socket = socket;
+    // console.log('connecting has begun!  inform the peasants!')
+    // this.socket.onopen = function (event) {
+    //   console.log('event', event);
+    //   console.log('console.logged Connected to server');
+    //   socket.send('sdfkjhsfkhsd;fjhs;r');
+    // };
+   
+    // socket.onmessage = function(str) {
+    //   console.log('Someone sent this: ', str);
+    //   //socket.send('Connected to server');
+    // };
+
+
   }
 
   addMessage(newMessageDetails) {
@@ -42,6 +49,8 @@ class App extends Component {
     this.setState({ 
       messages: newMessageList 
     });
+  
+    this.socket.send(JSON.stringify(newMessageDetails));
   }
 
   render() {
