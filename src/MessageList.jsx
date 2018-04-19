@@ -10,18 +10,19 @@ constructor() {
   render() {
     console.log("Rendering <MessageList/>", this.props);
     const messageText = this.props.messages.map((message) => (
-        <Message 
+      <Message 
         key={message.id} 
         datatype={message.type}
         content={message.content}
         username={message.username}
-        />
-      ));
+        usercolor={message.userColor}
+      />
+    ));
 
     return (
-    <main className="messages">
-    {messageText}
-    </main>
+      <main className="messages">
+        {messageText}
+      </main>
     );
   }
 }

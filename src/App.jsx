@@ -9,9 +9,10 @@ class App extends Component {
   
 
     this.state = {
-      currentUser: {name: 'Bob'}, // optional. if currentUser is not defined, it means the user is Anonymous
+      currentUser: {name: 'Bob', id: ''}, // optional. if currentUser is not defined, it means the user is Anonymous
       messages: [],
-      activeUsers: 0
+      activeUsers: 0,
+      userColor: ''
     };
 
     // this.addMessage = this.addMessage.bind(this);
@@ -85,8 +86,12 @@ class App extends Component {
           <a href="/" className="navbar-brand">Chatty</a>
           <p className="active-users">{this.state.activeUsers} users online</p>
         </nav>
-        <MessageList messages={this.state.messages}/>
-        <ChatBar onKeyUp={this.sendMessage} changeUsername={this.changeUsername} currentUser={this.state.currentUser.name} />
+        <MessageList messages={this.state.messages} />
+        <ChatBar
+          onKeyUp={this.sendMessage}
+          changeUsername={this.changeUsername}
+          currentUser={this.state.currentUser.name}
+        />
       </div>
     );
   }
