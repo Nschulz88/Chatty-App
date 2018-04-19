@@ -10,7 +10,9 @@ class App extends Component {
 
     this.state = {
       currentUser: {name: 'Bob'}, // optional. if currentUser is not defined, it means the user is Anonymous
-      messages: []};
+      messages: [],
+      activeUsers: 0
+    };
 
     // this.addMessage = this.addMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -34,7 +36,12 @@ class App extends Component {
           this.setState({
             messages: this.state.messages.concat(messageObject),
           });
-          break;
+        break;
+        case 'activeUserCount':
+        this.setState({
+          activeUsers: messageObject.activeUsers,
+        });
+        break;
         default:
           throw new Error('Unknown event type ' + messageObject.type);
       }
@@ -76,6 +83,7 @@ class App extends Component {
       <div>
         <nav className="navbar">
           <a href="/" className="navbar-brand">Chatty</a>
+          <p className="active-users">{this.state.activeUsers} users online</p>
         </nav>
         <MessageList messages={this.state.messages}/>
         <ChatBar onKeyUp={this.sendMessage} changeUsername={this.changeUsername} currentUser={this.state.currentUser.name} />
