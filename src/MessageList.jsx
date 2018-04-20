@@ -1,14 +1,19 @@
 import React, {Component} from 'react';
 import Message from './Message.jsx';
-
+// library to set prop types - (helps to detect issues earlier)
+import PropTypes from 'prop-types';
 
 
 class MessageList extends Component {
 constructor() {
-    super();
+  super();
 }
   render() {
-    console.log("Rendering <MessageList/>", this.props);
+
+    MessageList.propTypes = {
+      messages: PropTypes.array
+    }
+
     const messageText = this.props.messages.map((message) => (
       <Message 
         key={message.id} 
@@ -26,4 +31,5 @@ constructor() {
     );
   }
 }
+
 export default MessageList;
