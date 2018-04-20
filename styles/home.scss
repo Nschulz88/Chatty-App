@@ -1,17 +1,23 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url('https://fonts.googleapis.com/css?family=Gaegu|IBM+Plex+Mono|Noto+Sans|Pacifico|Sacramento|Shadows+Into+Light');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+
+$color-main: turquoise;
+
 
 body {
   background: white;
   color: black;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   font-size: 14px;
-  margin: 70px 0;
+  margin: 65px 0;
 }
 
 .chatbar {
-  background: tomato;
+  background: $color-main;
   border-top: 1px solid black;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   bottom: 0;
   display: flex;
   left: 0;
@@ -23,9 +29,10 @@ body {
 .chatbar-message,
 .chatbar-username {
   border: 1px solid black;
+  border-radius: 5px;
   display: block;
   height: 40px;
-  line-height: 40px;
+  line-height: 1.4em;
   margin: 5px;
   padding: 0 9px;
 }
@@ -65,8 +72,10 @@ body {
 }
 
 .navbar {
-  background: tomato;
+  background: $color-main;
   border-bottom: 1px solid black;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   height: 60px;
   left: 0;
   padding: 0 10px;
@@ -85,4 +94,13 @@ body {
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
+}
+
+.active-users {
+  float: right;
+}
+
+.notification-content {
+  font-style: italic;
+  font-size: 80%
 }

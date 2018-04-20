@@ -21,6 +21,7 @@ constructor() {
         content={message.content}
         username={message.username}
         usercolor={message.userColor}
+        userfont={message.userFont}
       />
     ));
 

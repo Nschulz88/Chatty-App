@@ -12,7 +12,11 @@ class Message extends Component {
       content: PropTypes.string,
       usercolor: PropTypes.string,
       username: PropTypes.string,
+      userfont: PropTypes.string,
     }
+
+    console.log("This is my userfont:", this.props.userfont);
+
 
     let newContent = null;
     let text = this.props.content;
@@ -39,7 +43,7 @@ class Message extends Component {
     <main className="messages">
         <div className="message">
           <span className="message-username" style={{color: this.props.usercolor }}>{this.props.username}</span>
-          <span className="message-content">{this.props.content} <br /> {newContent}</span>
+          <span className="message-content" style={{fontFamily: this.props.userfont }}>{this.props.content} <br /> {newContent}</span>
         </div>
     </main>
     );
