@@ -5,9 +5,9 @@ This app communicates with a server via WebSockets to offer a multi-user, real-t
 
 ## Final Product 
 
-!["Chat-Example-1"](https://github.com/Nschulz88/Chatty-App/blob/master/docs/Chatty%20App%20screenshot1-border.png){: .shadow}
+!["Chat-Example-1"](https://github.com/Nschulz88/Chatty-App/blob/master/docs/screenshot1-border.png)
 
-!["Chat-Example-2 with name change"](https://github.com/Nschulz88/Chatty-App/blob/master/docs/Chatty%20App%20screenshot2-border.png){: .shadow}
+!["Chat-Example-2 with name change"](https://github.com/Nschulz88/Chatty-App/blob/master/docs/screenshot2-border.png)
 
 
 ## Dependencies
