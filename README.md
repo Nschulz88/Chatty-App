@@ -1,45 +1,54 @@
-React Boilerplate
-=====================
+# Chatty App
 
-A minimal and light dev environment for ReactJS.
+A client-side SPA (Single-Page Application) built with ReactJS, Webpack, Babel, Node.js and Web Sockets. 
+This app communicates with a server via WebSockets to offer a multi-user, real-time chat experience. Currently there is no persistent Database attached to this project.
+
+## Final Product 
+
+!["Chat-Example-1"](https://github.com/Nschulz88/Chatty-App/blob/master/docs/Chatty%20App%20Screenshot_1.png)
+!["Chat-Example-2 with name change"](https://github.com/Nschulz88/Chatty-App/blob/master/docs/Chatty%20App%20Screenshot_2.png)
+
+
+## Dependencies
+
+- babel-core
+- babel-loader
+- babel-preset-es2015
+- babel-preset-react
+- css-loader
+- node-sass
+- sass-loader
+- sockjs-client
+- style-loader
+- webpack
+- webpack-dev-server
+- react
+- react-dom
+- prop-types
+
 
 ### Usage
 
-Clone the boilerplate and create your own git repo.
+Clone this repo to your local machine. Follow these instructions to start both servers.
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+**You will need to have 2 terminals open: **
 
-Install the dependencies and start the server.
-
+1. One to run the websocket server
+Move into the 'chatty-app' folder and from there into the 'chatty-server' folder, from here --> install the dependencies and start the (websocket)server:
 ```
+cd chatty-app
+cd chatty-server
 npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
+npm run start
 
 ```
-npm run lint
+
+2. One to run the app
+
+In second terminal window, open 'chatty-app' folder, from here --> install the dependencies and start the (app) server.
 ```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+cd chatty-app
+npm install
+npm run start
+```
+Now, open http://localhost:3000 in your browser and enjoy chit-chatting!!
