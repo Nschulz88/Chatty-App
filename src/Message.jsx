@@ -14,10 +14,7 @@ class Message extends Component {
       username: PropTypes.string,
       userfont: PropTypes.string,
     }
-
-    console.log("This is my userfont:", this.props.userfont);
-
-
+    
     let newContent = null;
     let text = this.props.content;
     // RedEx to find any image URL inside of the sent message text
